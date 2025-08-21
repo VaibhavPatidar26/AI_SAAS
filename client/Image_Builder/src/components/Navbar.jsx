@@ -2,7 +2,7 @@ import React, { useState, useContext, act, useEffect } from 'react';
 import { assets } from '../assets/assets';
 import { Link, Navigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, LogOut } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -89,15 +89,16 @@ const Navbar = () => {
 
               {/* Username + Logout */}
               <div className="relative group inline-block">
-                <button className="text-gray-300 font-medium hover:text-white transition">
+                <button className="text-gray-300 font-medium hover:text-white transition whitespace-nowrap overflow-hidden text-ellipsis max-w-32">
                   Hi! {displayuser}
                 </button>
-                <div className="absolute left-0 mt-2 w-full opacity-0 scale-y-0 group-hover:opacity-100 group-hover:scale-y-100 transition-all duration-200 origin-top transform">
+                <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-28 opacity-0 scale-y-0 group-hover:opacity-100 group-hover:scale-y-100 transition-all duration-200 origin-top">
                   <button
                     onClick={handleLogout}
-                    className="w-full bg-red-500 text-white px-4 py-2 rounded shadow-md hover:bg-red-600"
+                    className="w-full bg-red-500 text-white px-3 py-2 rounded shadow-lg hover:bg-red-600 transition text-sm font-medium flex items-center justify-center space-x-2"
                   >
-                    Logout
+                    <LogOut className="w-3 h-3" />
+                    <span>Logout</span>
                   </button>
                 </div>
               </div>
@@ -122,7 +123,7 @@ const Navbar = () => {
         <div className="md:hidden">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2 rounded-md border border-gray-700 hover:bg-gray-800"
+            className="p-2 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors duration-200"
           >
             <svg
               className="w-6 h-6 text-gray-300"
@@ -142,39 +143,111 @@ const Navbar = () => {
 
         {/* Mobile Dropdown Menu */}
         {menuOpen && (
-          <div className="absolute top-full left-0 w-full bg-[#0e0e0f] border-t border-gray-800 shadow-md flex flex-col items-start px-6 py-4 space-y-4 md:hidden">
-            {token ? (
-              <>
-                <div className="flex items-center bg-[#1f1f21] rounded-full px-4 py-2 space-x-2 shadow-sm border border-gray-700">
-                  <div className="bg-gradient-to-tr from-gray-400 to-gray-200 text-black p-1 rounded-full">
-                    <svg className="w-4 h-4" fill="black" viewBox="0 0 24 24">
-                      <path d="M12 2L14.09 8.26L20 9.27L15.5 13.97L16.91 20L12 16.9L7.09 20L8.5 13.97L4 9.27L9.91 8.26L12 2Z" />
-                    </svg>
-                  </div>
-                  <span className="text-sm font-medium text-gray-300">
-                    Credits left: {credit}
-                  </span>
+          <div className="absolute top-full left-0 w-full bg-gradient-to-b from-[#0e0e0f] to-[#1a1a1a] border-t border-gray-700 shadow-2xl backdrop-blur-sm md:hidden">
+            <div className="px-6 py-6 space-y-6">
+              
+              {/* Tools Section */}
+              <div className="space-y-3">
+                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Tools</h3>
+                <div className="space-y-2">
+                  <button 
+                    onClick={() => {setactiveState("Image Generation"); setMenuOpen(false);}}
+                    className="w-full text-left px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all duration-200 border border-transparent hover:border-gray-700"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <span className="text-sm font-medium">Image Generation</span>
+                    </div>
+                  </button>
+                  <button 
+                    onClick={() => {setactiveState("Background Remover"); setMenuOpen(false);}}
+                    className="w-full text-left px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all duration-200 border border-transparent hover:border-gray-700"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span className="text-sm font-medium">Background Remover</span>
+                    </div>
+                  </button>
+                  <button 
+                    onClick={() => {setactiveState("Image Upscaler"); setMenuOpen(false);}}
+                    className="w-full text-left px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all duration-200 border border-transparent hover:border-gray-700"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                      <span className="text-sm font-medium">Image Upscaler</span>
+                    </div>
+                  </button>
                 </div>
-                <button
-                  onClick={handleLogout}
-                  className="bg-red-500 text-white w-full px-4 py-2 rounded shadow-md hover:bg-red-600 transition"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <Link to="/Login" className="w-full">
-                <button className="bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 text-black w-full text-sm font-medium px-6 py-2 rounded-full hover:opacity-90 transition">
-                  Login
-                </button>
-              </Link>
-            )}
+              </div>
 
-            <Link to="/BuyCredit" className="w-full">
-              <button className="text-gray-400 text-sm font-medium hover:text-white transition">
-                Pricing
-              </button>
-            </Link>
+              {/* Divider */}
+              <div className="border-t border-gray-700"></div>
+
+              {token ? (
+                <>
+                  {/* User Section */}
+                  <div className="space-y-4">
+                    <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Account</h3>
+                    
+                    {/* User Info */}
+                    <div className="bg-gradient-to-r from-gray-800/40 to-gray-700/40 rounded-xl p-4 border border-gray-700/50">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-sm font-medium text-white">Hi! {displayuser}</p>
+                          <p className="text-xs text-gray-400 mt-1">Welcome back</p>
+                        </div>
+                        <div className="text-right">
+                          <div className="flex items-center space-x-2">
+                            <div className="bg-gradient-to-tr from-gray-400 to-gray-200 text-black p-1.5 rounded-full">
+                              <svg className="w-3 h-3" fill="black" viewBox="0 0 24 24">
+                                <path d="M12 2L14.09 8.26L20 9.27L15.5 13.97L16.91 20L12 16.9L7.09 20L8.5 13.97L4 9.27L9.91 8.26L12 2Z" />
+                              </svg>
+                            </div>
+                            <span className="text-sm font-semibold text-white">{credit}</span>
+                          </div>
+                          <p className="text-xs text-gray-400 mt-1">credits left</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <Link to="/BuyCredit" className="w-full" onClick={() => setMenuOpen(false)}>
+                        <button className="w-full bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 text-black text-sm font-medium px-4 py-3 rounded-lg hover:opacity-90 transition-all duration-200 shadow-sm">
+                          Buy Credits
+                        </button>
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="w-full bg-gradient-to-r from-red-600 to-red-500 text-white px-4 py-3 rounded-lg shadow-sm hover:from-red-700 hover:to-red-600 transition-all duration-200 text-sm font-medium flex items-center justify-center space-x-2"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        <span>Logout</span>
+                      </button>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Guest Section */}
+                  <div className="space-y-4">
+                    <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Get Started</h3>
+                    <div className="space-y-3">
+                      <Link to="/Login" className="w-full" onClick={() => setMenuOpen(false)}>
+                        <button className="w-full bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 text-black text-sm font-medium px-6 py-3 rounded-lg hover:opacity-90 transition-all duration-200 shadow-sm">
+                          Login to Continue
+                        </button>
+                      </Link>
+                      <Link to="/BuyCredit" className="w-full" onClick={() => setMenuOpen(false)}>
+                        <button className="w-full text-gray-400 text-sm font-medium hover:text-white transition-colors duration-200 border border-gray-700 py-3 rounded-lg hover:border-gray-600">
+                          View Pricing
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         )}
       </div>
