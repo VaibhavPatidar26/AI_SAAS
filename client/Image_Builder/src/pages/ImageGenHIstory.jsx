@@ -3,7 +3,7 @@ import useImgGenHistory from '../hooks/useImgGenHistory'
 import { AppContext } from '../context/AppContext'
 import { FocusCards } from '../components/ui/focus-cards'
 import { apiDeleteGenHistory } from '../api/history'
-import BgRemCard from '../components/ui/bgRemCard'
+import BgRemCard from '../components/ui/BgRemCard'
 import DownloadImage from '../utils/DownloadImage'
 const ImageGenHistory = () => {
   const { Images, token, backendUrl } = useContext(AppContext)
