@@ -1,0 +1,18 @@
+const express = require("express")
+const mongoose = require("mongoose")
+const HistoryRouter = express.Router()
+const ImageGenHistory = require("../controllers/ImageGenHistory")
+const isLoggedIn = require("../middlewares/isLoggedIn")
+const BgRemoveHistory = require("../controllers/BgRemoverHistory")
+const GenHistDelete = require("../controllers/GenHIstDelete")
+const BgRemHistDelete = require("../controllers/BgRemHistDelete")
+const UpsclaeHistDel = require("../controllers/UpscaleHistDel")
+const ImgUpscaleHist = require("../controllers/ImgUpscaleHist")
+
+HistoryRouter.get("/ImgGenHist",isLoggedIn,ImageGenHistory)
+HistoryRouter.get("/BgRemHist",isLoggedIn,BgRemoveHistory)
+HistoryRouter.delete("/ImgGenHist/delete/:id",isLoggedIn,GenHistDelete)
+HistoryRouter.delete("/BgRemHist/delete/:id",isLoggedIn,BgRemHistDelete)
+HistoryRouter.delete("/upscaleHist/delete/:id",isLoggedIn,UpsclaeHistDel)
+HistoryRouter.get("/ImgupsHist",isLoggedIn,ImgUpscaleHist)
+module.exports=HistoryRouter
