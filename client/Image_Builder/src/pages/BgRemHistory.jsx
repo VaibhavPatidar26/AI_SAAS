@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import BgRemCard from "../components/ui/bgRemCard"
+import BgRemCard from "../components/ui/BgRemCard"
 import DownloadImage from '../utils/DownloadImage';
 import { apiDeleteBgRemHistory } from '../api/history';
 import { AppContext } from '../context/AppContext';
