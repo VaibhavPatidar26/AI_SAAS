@@ -6,7 +6,7 @@ const ImageRouter = require("./Router/ImageRouter");
 const cors = require("cors");
 const HistoryRouter = require("./Router/HistoryRouter");
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 const allowedOrigins = process.env.ALLOWED_ORIGINS.split(",")
 
 app.use(cors({
