@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import useImgGenHistory from '../hooks/UseImgGenHistory'
+import useImgGenHistory from '../hooks/useImgGenHistory'
 import { AppContext } from '../context/AppContext'
 import { FocusCards } from '../components/ui/focus-cards'
 import { apiDeleteGenHistory } from '../api/history'
