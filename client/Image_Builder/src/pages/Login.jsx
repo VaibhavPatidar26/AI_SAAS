@@ -82,6 +82,7 @@ const Login = () => {
             <input
               type="text"
               value={Name}
+              disabled={loading}
               onChange={(e) => setName(e.target.value)}
               placeholder="Full name"
               className="w-full px-3 py-2 bg-[#262626] border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:ring-2 focus:ring-gray-500 focus:outline-none"
@@ -90,6 +91,7 @@ const Login = () => {
 
           <input
             type="email"
+            disabled={loading}
             required
             value={Email}
             onChange={(e) => setEmail(e.target.value)}
@@ -101,6 +103,7 @@ const Login = () => {
             <input
               type={ShowPass ? "text" : "password"}
               required
+              disabled={loading}
               value={Password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
@@ -108,6 +111,7 @@ const Login = () => {
             />
             <button
               type="button"
+              disabled={loading}
               className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-200"
               onClick={() => setShowPass((prev) => !prev)}
             >
@@ -118,6 +122,7 @@ const Login = () => {
           {!Account && (
             <input
               type="password"
+              disabled={loading}
               value={ConfirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm password"
@@ -152,6 +157,7 @@ const Login = () => {
               Don’t have an account?{" "}
               <button
                 onClick={handleclick}
+                disabled={loading}
                 className="text-gray-300 hover:text-white font-medium"
               >
                 Sign up
@@ -162,6 +168,7 @@ const Login = () => {
               Already have an account?{" "}
               <button
                 onClick={handleclick}
+                disabled={loading}
                 className="text-gray-300 hover:text-white font-medium"
               >
                 Sign in
